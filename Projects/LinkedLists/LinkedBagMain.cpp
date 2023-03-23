@@ -11,7 +11,11 @@ int main(){
       list.add(3);
       list.display();
       list.addToTail(5);
-      list.removeFromTail(5);
+      cout << "Lista con 5 añadido: ";
+      list.display();
+      list.removeFromTail(4);
+      cout << "Lista con 4 removido: ";
+      list.display();
       
       int x = 3;
       int frequency = list.getFrequencyOf(x);

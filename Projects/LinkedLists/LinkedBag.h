@@ -193,9 +193,14 @@ bool LinkedBag<ItemType>::removeFromTail(const ItemType& anEntry){
       entryNodePtr->setItem(curPtr->getItem());
       
       // Delete last node
-      Node<ItemType>* nodeToDeletePtr = curPtr;
+      Node<ItemType>* nodeToDeletePtr = curPtr; // cant be current pointer because its already at the end 
+      
+      curPtr = headPtr;// resetting node to head 
+      while (curPtr->getNext() != nodeToDeletePtr) //taking the node to the place before the last node 
+         curPtr = curPtr->getNext();
       
       // Return node to the system
+      curPtr->setNext(nullptr);
       delete nodeToDeletePtr;
       nodeToDeletePtr = nullptr;
       
