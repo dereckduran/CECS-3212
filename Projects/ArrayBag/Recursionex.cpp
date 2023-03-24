@@ -55,6 +55,7 @@ int main(){
     int len =  sizeof(numbers)/sizeof(numbers[0]);
     int instances = getNumberEqual(numbers, len, 1);
     cout << "Number of instances: " << instances << endl;
+    cout << Acker(1,2) << endl;
     return 0;
 }
 /* 
