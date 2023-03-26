@@ -118,15 +118,15 @@ bool BookList::remove(string &remtitle){
     }
     BookList temp;
 
-    for(int i = pos; i < top; i++){
-        books[i] = books[i + 1];
-    }
-
-    for(int i = 0; i < top; i++){
+    //traspasando los libros que estan encima al arreglo temporero
+    for(int i = pos + 1; i < top; i++){
         temp.add(books[i]);
     }
+    //disminuyendo top 
     top--;
-    for (int i = 0; i < top; i ++){
+
+    //traspasando el contenido del objeto temporero de nuevo a la lista original usando el .top de la lista temporera
+    for (int i = pos; i < temp.top; i ++){
         books[i] = temp.books[i];
         removed = true;
     }
@@ -156,7 +156,7 @@ string& BookList::operator[](int index){
 ostream& operator<<(ostream& out, const BookList& obj){
     if(obj.top == 0){
         out << "There are no books in the list. " << endl;
-        exit(1);
+        
     }
     else{
         out<< "List of books:" <<endl;
