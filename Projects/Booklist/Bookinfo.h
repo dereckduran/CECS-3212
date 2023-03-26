@@ -1,4 +1,4 @@
-ifndef BOOKINFO_H
+#ifndef BOOKINFO_H
 #define BOOKINFO_H
 #include <iostream>
 #include <string>
@@ -23,7 +23,7 @@ class BookInfo{
         void setAuthor(string);
         void setPublisher(string);
         void setBookInfo(string, string, string);
-        string getTitle();
+        string getTitle() const;
         string getAuthor();
         string getPublisher();
 
@@ -80,7 +80,7 @@ void BookInfo::setBookInfo(string newtitle, string newauthor, string newpublishe
     this->setAuthor(newauthor);
     this->setPublisher(newpublisher);
 }
-string BookInfo::getTitle()
+string BookInfo::getTitle() const
 {
     return title;
 }

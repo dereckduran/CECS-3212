@@ -5,7 +5,7 @@
 #include <iomanip>
 using namespace std;
 const int MAX_CAPACITY = 5;
-class BookList{
+class Book{
     private:
     int top;
     string books[MAX_CAPACITY];
@@ -13,13 +13,13 @@ class BookList{
     
     //constructors and destructor
     
-    BookList();
+    Book();
     
-    BookList(string [], int);
+    Book(string [], int);
     
-    BookList(const BookList&);
+    Book(const Book&);
     
-    ~BookList();
+    ~Book();
     
     //methods 
     
@@ -41,21 +41,19 @@ class BookList{
     
     string &operator[](int );
     
-    friend ostream& operator<<(ostream& out, const BookList& obj);
+    friend ostream& operator<<(ostream& out, const Book& obj);
     
-    friend istream& operator>>(istream& in, BookList& obj); 
+    friend istream& operator>>(istream& in, Book& obj); 
 };
-BookList::BookList(){
+Book::Book(){
     
     for(int i = 0; i < MAX_CAPACITY; i++){
-    
-    books[i] = " ";
-    
+        books[i] = " ";
     }
  
     top = 0;
 }
-BookList::BookList(string list[], int n){
+Book::Book(string list[], int n){
     if (n > MAX_CAPACITY){
         cout << "The number of books cannot exceed the maximum capacity: " << MAX_CAPACITY << endl;
     }
@@ -67,26 +65,26 @@ BookList::BookList(string list[], int n){
     }
         
 }
-BookList::BookList(const BookList& temp){
+Book::Book(const Book& temp){
     top = temp.top;
     for(int i = 0; i < temp.top; i++){
         books[i] = temp.books[i];
     }
 }
-BookList::~BookList(){}
+Book::~Book(){}
 
-bool BookList::isEmpty(){
+bool Book::isEmpty(){
     return (top == 0);
 }
-bool BookList::isFull(){
+bool Book::isFull(){
     return (top == MAX_CAPACITY);
 }
 
-int BookList::getCurrentSize(){
+int Book::getCurrentSize(){
     return top;
 }
 
-void BookList::add(string newtitle){
+void Book::add(string newtitle){
     if(isFull()){
         cout << "The book list is full. Cannot exceed: " << MAX_CAPACITY << endl;
     }
@@ -95,7 +93,7 @@ void BookList::add(string newtitle){
         top++;
     }
 }
-int BookList::contains(string _title){
+int Book::contains(string _title){
     for(int i = 0; i < top; i++){
         if (books[i] == _title){
             return i;
@@ -103,7 +101,7 @@ int BookList::contains(string _title){
     }
     return -1;
 }
-bool BookList::remove(string &remtitle){
+bool Book::remove(string &remtitle){
     bool removed; 
     if(isEmpty()){
         cout << "There are no books in the list. "<< endl;
@@ -116,7 +114,7 @@ bool BookList::remove(string &remtitle){
         removed = false;
         return removed;
     }
-    BookList temp;
+    Book temp;
 
     //traspasando los libros que estan encima al arreglo temporero
     for(int i = pos + 1; i < top; i++){
@@ -134,7 +132,7 @@ bool BookList::remove(string &remtitle){
     return removed;
 }
 
-void BookList::display(){
+void Book::display(){
     if(isEmpty()){
         cout<< "There are no books in the list. " << endl;
     }
@@ -145,7 +143,7 @@ void BookList::display(){
     }
 }
 
-string& BookList::operator[](int index){
+string& Book::operator[](int index){
     if(index  > top){
         cout << "Index out of bounds."<<endl;
         exit(1);
@@ -153,7 +151,7 @@ string& BookList::operator[](int index){
     return books[index];
 }
 
-ostream& operator<<(ostream& out, const BookList& obj){
+ostream& operator<<(ostream& out, const Book& obj){
     if(obj.top == 0){
         out << "There are no books in the list. " << endl;
         
@@ -167,7 +165,7 @@ ostream& operator<<(ostream& out, const BookList& obj){
     }
     return out;
 }
-istream& operator>>(istream& in, BookList& obj){
+istream& operator>>(istream& in, Book& obj){
     int numOfBooks, i;
     string bookTitle;
 

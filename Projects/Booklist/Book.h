@@ -10,7 +10,7 @@ template <class T>
 class BookList{
     private:
         int top;
-        T *books;
+        T books[MAX_CAPACITY];
         
     public:
         //constructors and destructor
@@ -39,12 +39,11 @@ class BookList{
 };
 template <class T>
 BookList<T>::BookList(){
-    books = new T[MAX_CAPACITY];
     top = 0;
+    
 }
 template <class T>
 BookList<T>::BookList(T list[], int n){
-    books = new T[MAX_CAPACITY];
     if(n > MAX_CAPACITY){
         cout<<"The number of books cannot exceed the maximum capacity of the list: " << MAX_CAPACITY << endl;
     } else{
@@ -63,22 +62,19 @@ BookList<T>::BookList(const BookList<T>& temp){
 }
 template <class T>
 BookList<T>::~BookList(){
-    delete [] books;
+    
 }
 template <class T>
 bool BookList<T>::isEmpty(){
-    if (top == 0)
-        return true;
-    return false;
+   return top == 0;
     
 }
 
 template <class T>
 bool BookList<T>::isFull()
 {   
-    if (top == MAX_CAPACITY)
-        return true;
-    return false;
+    return top == MAX_CAPACITY;
+        
 }
 template <class T>
 int BookList<T>::getCurrentSize()
@@ -127,21 +123,18 @@ bool BookList<T>::remove(string _title)
     }
     //lista temporera
     BookList<T> temp; 
-    //añadimos todos los libros hasta la pocision de el libro que queremos remover 
-    for (int i = 0; i < pos; i++){
-        temp.add(books[i]);
-    }
-    //ahora empezamos a iterar de la posicion + 1 para darle skip a la posicion
+    
+    //empezamos despues de la posicion para anadir los libros que estan encima a la lista temporera
     for (int i = pos + 1; i < top; i++){
         temp.add(books[i]);
     }
-
-    //ahora de nuevo copiamos los elementos de la lista temporero de nuevo a books 
-    for(int i = 0; i < top; i++){
-        books[i] = temp.books[i];
-    }
     //decrementando el valor de top que indica la cnatidad de libros
     top--;
+    //ahora de nuevo copiamos los elementos de la lista temporero de nuevo a books 
+    for(int i = 0; i < temp.top; i++){
+        books[i] = temp.books[i];
+    }
+    
     cout<< "Book title removed successfully."<< endl;
     return removed;
 }
@@ -171,7 +164,6 @@ ostream& operator<<(ostream& out, const BookList<T>& obj){
     //verificando si hay libros en la lista primero 
     if (obj.top == 0){
         out<< "There are no books in the list." <<endl;
-        exit(1);
     }
     else{
         out << "List of books:" << endl;
@@ -189,7 +181,7 @@ istream& operator>>(istream& in, BookList<T>& obj){
     in>>numofbooks;
 
     in.ignore();
-    if (obj.isFull() || numofbooks > MAX_CAPACITY){
+    if (obj.isFull() || numofbooks > MAX_CAPACITY || numofbooks + obj.top > MAX_CAPACITY){
         cout<< "The list cannot exceed max capacity: " << MAX_CAPACITY <<endl;
         while (numofbooks > MAX_CAPACITY){
             cout << "Please try again." << endl;
