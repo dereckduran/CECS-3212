@@ -181,11 +181,11 @@ bool LinkedBag<ItemType>::remove(const ItemType& anEntry)
 }  // end remove
 template <class ItemType>
 bool LinkedBag<ItemType>::removeFromTail(const ItemType& anEntry){
-   Node<ItemType>* entryNodePtr = getPointerTo(anEntry);
+   Node<ItemType>* entryNodePtr = getPointerTo(anEntry); //buscamos el puntero donde este la info para eliminar
    bool canRemoveItem = !isEmpty() && (entryNodePtr != nullptr);
    if (canRemoveItem)
    {
-      Node<ItemType>* curPtr = headPtr;
+      Node<ItemType>* curPtr = headPtr; //un puntero actual para ir hacia el final de la lista 
       while(curPtr->getNext() != nullptr){
          curPtr = curPtr->getNext();
       }
