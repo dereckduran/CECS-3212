@@ -125,17 +125,24 @@ bool LinkedBag<ItemType>::add(const ItemType& newEntry)
 }  // end add
 template<class ItemType>
 bool LinkedBag<ItemType>::addToTail(const ItemType & newEntry){
-   // Add to beginning of chain: new node references rest of chain;
+   // Add to end of chain: new node references rest of chain;
    // (headPtr is null if chain is empty)        
    Node<ItemType>* nextNodePtr = new Node<ItemType>();
    nextNodePtr->setItem(newEntry);
    nextNodePtr->setNext(nullptr);  // New node points to chain
 //   Node<ItemType>* nextNodePtr = new Node<ItemType>(newEntry, headPtr); // alternate code
-   Node<ItemType>* curPtr = headPtr;
-   while(curPtr->getNext() != nullptr) //iterando hacia el final de la lista
-      curPtr = curPtr->getNext();
-   curPtr->setNext(nextNodePtr);     //añadiendo NewEntry al final
-   itemCount++;
+   if(isEmpty())
+   {
+      headPtr = nextNodePtr;
+      itemCount++;
+   }
+   else {
+      Node<ItemType>* curPtr = headPtr;
+      while(curPtr->getNext() != nullptr) //iterando hacia el final de la lista
+         curPtr = curPtr->getNext();
+      curPtr->setNext(nextNodePtr);     //añadiendo NewEntry al final
+      itemCount++;
+   }
    
    return true;
 }

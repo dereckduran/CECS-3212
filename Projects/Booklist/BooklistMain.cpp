@@ -6,7 +6,7 @@ using namespace std;
 
 void displayMenu();
 int main(){
-    BookList myBooks;
+    Book myBooks;
     char choice;
     string bookTitle;
 

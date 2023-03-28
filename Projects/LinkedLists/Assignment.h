@@ -26,7 +26,7 @@ class Assignment{
         
         bool operator>(const Assignment &);
         bool operator<(const Assignment &);
-        bool operator==(const Assignment &);
+        bool operator==(const Assignment &) const;
         friend istream &operator>>(istream &in, Assignment &);
         friend ostream &operator<<(ostream &out, const Assignment &);
 
@@ -74,9 +74,9 @@ bool Assignment::operator<(const Assignment &_temp)
     return (duedate < _temp.getDueDate());
 } //end opearator<
 
-bool Assignment::operator==(const Assignment &_temp)
+bool Assignment::operator==(const Assignment &_temp) const
 {
-    return (duedate == _temp.getDueDate());
+    return (duedate == _temp.getDueDate() && description == _temp.getDescription());
 } //end operator==
 
 istream &operator>>(istream &in, Assignment &_tempassignment) //getlines
@@ -92,6 +92,6 @@ istream &operator>>(istream &in, Assignment &_tempassignment) //getlines
 ostream &operator<<(ostream &out, const Assignment& _tempassignment)
 {
     //out << setfill('-') << setw(10) << "";
-    out << "Assignment: " << _tempassignment.description << " " << setfill('-') << setw(20) << " Due Date: " << _tempassignment.duedate << endl;
+    out  << _tempassignment.description << " " << setfill('-') << setw(20) << " " << _tempassignment.duedate << endl;
     return out;
 }
