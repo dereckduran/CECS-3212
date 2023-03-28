@@ -8,7 +8,7 @@ class Date{
         int checkDay(int) const; //utility function 
         int checkMonth(int) const;
     public:
-        Date(int =11,int=17,int=2010); 
+        Date(int =29,int=29,int=9999); 
         Date(const Date &);
         ~Date();
         void setValues(int,int,int);
@@ -90,7 +90,7 @@ int Date:: checkMonth(int tempMonth) const //utility function
 
 bool Date::operator>(const Date &_date) const
 {
-    return (year > _date.getYear() && month > _date.getMonth() && day > _date.getDay());
+    return ((year > _date.getYear()) || (year > _date.getYear() && month > _date.getMonth()) || (year > _date.getYear() && month > _date.getMonth() && day > _date.getDay()));
 }
 
  bool Date::operator==(const Date &_date) const
@@ -100,7 +100,7 @@ bool Date::operator>(const Date &_date) const
 
  bool Date::operator<(const Date &_date) const
 {
-    return (year < _date.getYear() && month < _date.getMonth() && day < _date.getDay());
+    return (getYear() < _date.getYear() || (getYear() == _date.getYear() && getMonth() < _date.getMonth()) || (getYear() == _date.getYear() && getMonth() == _date.getMonth() && getDay() < _date.getDay()));
 }
 
 int Date::checkDay(int tempDay) const // utility function

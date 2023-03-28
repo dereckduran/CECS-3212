@@ -92,6 +92,6 @@ istream &operator>>(istream &in, Assignment &_tempassignment) //getlines
 ostream &operator<<(ostream &out, const Assignment& _tempassignment)
 {
     //out << setfill('-') << setw(10) << "";
-    out  << _tempassignment.description << " " << setfill('-') << setw(20) << " " << _tempassignment.duedate << endl;
+    out << _tempassignment.description << setw(40) << _tempassignment.duedate;
     return out;
 }

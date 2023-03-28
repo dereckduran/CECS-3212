@@ -23,7 +23,7 @@ void displayMenu()
     cout << "A) Display the assignment list in order added to list\n";
     cout << "B) Add an assignment\n";
     cout << "C) Remove an assignment \n";
-    cout << "D) Get assignment(s) with earlies due date \n";
+    cout << "D) Get assignment(s) with earliest due date \n";
     cout << "E) Exit the program \n";
     cout << "Enter your choice: ";
 }
@@ -60,7 +60,9 @@ void run(){
             break;
 
             case 'd':
-            case 'D': //myhomework.due();
+            case 'D':
+            //Assignment 
+            myhomework.due();
             break;
         }
     } while (toupper(choice) != 'E');

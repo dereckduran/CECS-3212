@@ -35,6 +35,7 @@ public:
    void display() const;
    bool contains(const ItemType& anEntry) const;
    int getFrequencyOf(const ItemType& anEntry) const;
+   Node<ItemType>* getHeadPtr() const;
    vector<ItemType> toVector() const;
 }; // end LinkedBag
 
@@ -46,7 +47,7 @@ template<class ItemType>
 void LinkedBag<ItemType>::display()const{
    Node<ItemType>* curPtr = headPtr;
    while(curPtr != nullptr){
-      cout << curPtr->getItem() <<  endl;
+      cout << curPtr->getItem() << endl;
       curPtr = curPtr->getNext();
    }
 }
@@ -255,6 +256,13 @@ int LinkedBag<ItemType>::getFrequencyOf(const ItemType& anEntry) const
    
 	return frequency;
 }  // end getFrequencyOf
+
+//funcion para acesar la cabeza de la lista
+template <class ItemType>
+Node<ItemType> *LinkedBag<ItemType>::getHeadPtr() const
+{
+    return headPtr;
+}
 
 template<class ItemType>
 bool LinkedBag<ItemType>::contains(const ItemType& anEntry) const
