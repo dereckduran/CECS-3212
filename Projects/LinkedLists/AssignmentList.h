@@ -77,8 +77,15 @@ void AssignmentList::show()
 // Funcion debe retornar una o varias instancias de Assignment que con contengan la fecha mas proxima de entrega
 Assignment AssignmentList::due()
 {
-    Assignment _earlyassignment; //creando un objeto para aguantar la info requerida 
-    Node<Assignment>* curPtr = myAsig.getHeadPtr(); //creando un puntero a la cabeza de la lista
+    //haciendo una lista temporera para almacenar todas las asignaciones si tienen la misma fecha de entrega 
+    //no la hago Assignment List porque la funcion de AssignmentList no recibe argumentos 
+    LinkedBag<Assignment> _tempList;
+
+    //creando un objeto para aguantar la info requerida 
+    Assignment _earlyassignment; 
+
+    //creando un puntero a la cabeza de la lista
+    Node<Assignment>* curPtr = myAsig.getHeadPtr(); 
 
     //verificando si hay elementos en la lista 
     if (myAsig.isEmpty())
@@ -87,15 +94,22 @@ Assignment AssignmentList::due()
         //mintras haiga elementos en la lista 
         while(curPtr != nullptr){
             //si la fecha de la asignacion es menor entonces cambia la info del objeto
-            if (curPtr->getItem().getDueDate() < _earlyassignment.getDueDate()){
+            if (curPtr->getItem().getDueDate() < _earlyassignment.getDueDate())
+            {
                 _earlyassignment.setDescription(curPtr->getItem().getDescription());
                 _earlyassignment.setDueDate(curPtr->getItem().getDueDate());
+                _tempList.addToTail(_earlyassignment);
+            }
+            // si hay otra asignacion con la misma fecha de entrega se debe añadir a una lista temporera
+            else if (curPtr->getItem().getDueDate() == _earlyassignment.getDueDate()) 
+            {
+                _tempList.addToTail(curPtr->getItem());
             }
             //mover el puntero al resto de la lista 
             curPtr = curPtr->getNext();
         } //salir del while 
-        cout << "The earliest assignment found: " << endl;
-        cout << _earlyassignment;
+        cout << "The earliest assignment(s) found: " << endl;
+        _tempList.display();
     }
     //retornar la informacion sin cambiar nada en la lista 
     return _earlyassignment;
