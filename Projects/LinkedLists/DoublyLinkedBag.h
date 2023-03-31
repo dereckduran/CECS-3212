@@ -4,17 +4,21 @@
 /** ADT bag: Link-based implementation.
     @file LinkedBag.h 
     Listing 4-3 */
-#ifndef _LINKED_BAG
-#define _LINKED_BAG
+#ifndef _DOUBLY_LINKED_BAG
+#define _DOUBLY_LINKED_BAG
 #include <cstddef>
 #include "BagInterface.h"
 #include "Node.h"
+#include <iostream>
+
+using namespace std;
 
 template<class ItemType>
-class LinkedBag : public BagInterface<ItemType>
+class DoublyLinkedBag : public BagInterface<ItemType>
 {
 private:
    Node<ItemType>* headPtr; // Pointer to first node
+   Node<ItemType>* tailPtr; // Pointer to last node
    int itemCount;           // Current count of bag items
    
    // Returns either a pointer to the node containing a given entry
@@ -22,17 +26,20 @@ private:
    Node<ItemType>* getPointerTo(const ItemType& target) const;
    
 public:
-   LinkedBag();
-   LinkedBag(const LinkedBag<ItemType>& aBag); // Copy constructor
-   virtual ~LinkedBag();                       // Destructor should be virtual
+   DoublyLinkedBag();
+   DoublyLinkedBag(const DoublyLinkedBag<ItemType>& aBag); // Copy constructor
+   virtual ~DoublyLinkedBag();                       // Destructor should be virtual
    int getCurrentSize() const;
    bool isEmpty() const;
    bool add(const ItemType& newEntry);
    bool addToTail(const ItemType& newEntry);
    bool remove(const ItemType& anEntry);
+   bool removeHead();
    bool removeFromTail(const ItemType& anEntry);
+   void shiftRight(ItemType pivot); 
    void clear();
    void display() const;
+   void displayFromTail() const;
    bool contains(const ItemType& anEntry) const;
    int getFrequencyOf(const ItemType& anEntry) const;
    Node<ItemType>* getHeadPtr() const;
@@ -40,22 +47,44 @@ public:
 }; // end LinkedBag
 
 template<class ItemType>
-LinkedBag<ItemType>::LinkedBag() : headPtr(nullptr), itemCount(0)
+DoublyLinkedBag<ItemType>::DoublyLinkedBag() : headPtr(nullptr), tailPtr(nullptr), itemCount(0)
 {
-}  // end default constructor
+}
+template <class ItemType>
+bool DoublyLinkedBag<ItemType>::removeHead()
+{
+
+   headPtr = headPtr->getNext();
+   headPtr->prev = nullptr;
+}// end default constructor
+
 template<class ItemType>
-void LinkedBag<ItemType>::display()const{
+void DoublyLinkedBag<ItemType>::display()const{
    Node<ItemType>* curPtr = headPtr;
    while(curPtr != nullptr){
-      cout << curPtr->getItem() << endl;
+      cout << curPtr->getItem() << " ";
       curPtr = curPtr->getNext();
    }
+   cout << endl;
 }
+
 template<class ItemType>
-LinkedBag<ItemType>::LinkedBag(const LinkedBag<ItemType>& aBag)
+void DoublyLinkedBag<ItemType>::displayFromTail()const{
+   Node<ItemType>* curPtr = tailPtr;
+  
+   while(curPtr != nullptr){
+      cout << curPtr->getItem() << " ";
+      curPtr = curPtr->getPrev();
+   }
+   cout<<endl;
+}
+
+template<class ItemType>
+DoublyLinkedBag<ItemType>::DoublyLinkedBag(const DoublyLinkedBag<ItemType>& aBag)
 {
 	itemCount = aBag.itemCount;
-   Node<ItemType>* origChainPtr = aBag.headPtr;  // Points to nodes in original chain
+    Node<ItemType>* origChainPtr = aBag.headPtr;  // Points to nodes in original chain
+    Node<ItemType>* origChainTailPtr = aBag.tailPtr;
    
    if (origChainPtr == nullptr)
       headPtr = nullptr;  // Original bag is empty
@@ -95,41 +124,66 @@ LinkedBag<ItemType>::LinkedBag(const LinkedBag<ItemType>& aBag)
 }  // end copy constructor
 
 template<class ItemType>
-LinkedBag<ItemType>::~LinkedBag()
+void DoublyLinkedBag<ItemType>::shiftRight(ItemType pivot)
+{
+   Node<ItemType>* shift = getPointerTo(pivot);
+   Node<ItemType>* _temp = headPtr;
+   ItemType itemCont = shift->getItem();
+
+   headPtr = shift;
+   shift = shift->getNext();
+   headPtr->setItem(shift->getItem());
+   headPtr = shift;
+   headPtr->setItem(itemCont);
+   headPtr = _temp;
+}
+
+template<class ItemType>
+DoublyLinkedBag<ItemType>::~DoublyLinkedBag()
 {
    clear();
 }  // end destructor
 
 template<class ItemType>
-bool LinkedBag<ItemType>::isEmpty() const
+bool DoublyLinkedBag<ItemType>::isEmpty() const
 {
 	return itemCount == 0;
 }  // end isEmpty
 
 template<class ItemType>
-int LinkedBag<ItemType>::getCurrentSize() const
+int DoublyLinkedBag<ItemType>::getCurrentSize() const
 {
 	return itemCount;
 }  // end getCurrentSize
 
 template<class ItemType>
-bool LinkedBag<ItemType>::add(const ItemType& newEntry)
+bool DoublyLinkedBag<ItemType>::add(const ItemType& newEntry)
 {
    // Add to beginning of chain: new node references rest of chain;
-   // (headPtr is null if chain is empty)        
+   // (headPtr is null if chain is empty)       
    Node<ItemType>* nextNodePtr = new Node<ItemType>();
    nextNodePtr->setItem(newEntry);
-   headPtr->setPrev(nextNodePtr);  // New node points to chain
+   nextNodePtr->setNext(nullptr);
+   if(isEmpty()){
+      headPtr = nextNodePtr;
+      tailPtr = nextNodePtr;
+      
+   } 
+   else{
+      headPtr->setPrev(nextNodePtr);  // heads prev will now be the new node 
+      nextNodePtr->setNext(headPtr);
+      headPtr = nextNodePtr;          // head pointer is the new node 
+      headPtr->setPrev(nullptr);
+      
+   }
 //   Node<ItemType>* nextNodePtr = new Node<ItemType>(newEntry, headPtr); // alternate code
-
-   headPtr = nextNodePtr;          // New node is now first node
    itemCount++;
-   
+
    return true;
 }  // end add
 
 template<class ItemType>
-bool LinkedBag<ItemType>::addToTail(const ItemType & newEntry){
+bool DoublyLinkedBag<ItemType>::addToTail(const ItemType & newEntry){
    // Add to end of chain: new node references rest of chain;
    // (headPtr is null if chain is empty)        
    Node<ItemType>* nextNodePtr = new Node<ItemType>();
@@ -146,6 +200,7 @@ bool LinkedBag<ItemType>::addToTail(const ItemType & newEntry){
       Node<ItemType>* curPtr = headPtr;
       while(curPtr->getNext() != nullptr) //iterando hacia el final de la lista
          curPtr = curPtr->getNext();
+      nextNodePtr->setPrev(curPtr);
       curPtr->setNext(nextNodePtr);     //añadiendo NewEntry al final
       itemCount++;
    }
@@ -153,7 +208,7 @@ bool LinkedBag<ItemType>::addToTail(const ItemType & newEntry){
    return true;
 }
 template<class ItemType>
-vector<ItemType> LinkedBag<ItemType>::toVector() const
+vector<ItemType> DoublyLinkedBag<ItemType>::toVector() const
 {
    vector<ItemType> bagContents;
    Node<ItemType>* curPtr = headPtr;
@@ -169,7 +224,7 @@ vector<ItemType> LinkedBag<ItemType>::toVector() const
 }  // end toVector
 
 template<class ItemType>
-bool LinkedBag<ItemType>::remove(const ItemType& anEntry)
+bool DoublyLinkedBag<ItemType>::remove(const ItemType& anEntry)
 {
    Node<ItemType>* entryNodePtr = getPointerTo(anEntry);
    bool canRemoveItem = !isEmpty() && (entryNodePtr != nullptr);
@@ -194,7 +249,7 @@ bool LinkedBag<ItemType>::remove(const ItemType& anEntry)
 	return canRemoveItem;
 }  // end remove
 template <class ItemType>
-bool LinkedBag<ItemType>::removeFromTail(const ItemType& anEntry){
+bool DoublyLinkedBag<ItemType>::removeFromTail(const ItemType& anEntry){
    Node<ItemType>* entryNodePtr = getPointerTo(anEntry); //buscamos el puntero donde este la info para eliminar
    bool canRemoveItem = !isEmpty() && (entryNodePtr != nullptr);
    if (canRemoveItem)
@@ -225,7 +280,7 @@ bool LinkedBag<ItemType>::removeFromTail(const ItemType& anEntry){
 	return canRemoveItem;
 }
 template<class ItemType>
-void LinkedBag<ItemType>::clear()
+void DoublyLinkedBag<ItemType>::clear()
 {
    Node<ItemType>* nodeToDeletePtr = headPtr;
    while (headPtr != nullptr)
@@ -246,7 +301,7 @@ void LinkedBag<ItemType>::clear()
 
 
 template<class ItemType>
-int LinkedBag<ItemType>::getFrequencyOf(const ItemType& anEntry) const
+int DoublyLinkedBag<ItemType>::getFrequencyOf(const ItemType& anEntry) const
 {
 	int frequency = 0;
    int counter = 0;
@@ -267,13 +322,13 @@ int LinkedBag<ItemType>::getFrequencyOf(const ItemType& anEntry) const
 
 //funcion para acesar la cabeza de la lista
 template <class ItemType>
-Node<ItemType> *LinkedBag<ItemType>::getHeadPtr() const
+Node<ItemType> *DoublyLinkedBag<ItemType>::getHeadPtr() const
 {
     return headPtr;
 }
 
 template<class ItemType>
-bool LinkedBag<ItemType>::contains(const ItemType& anEntry) const
+bool DoublyLinkedBag<ItemType>::contains(const ItemType& anEntry) const
 {
 	return (getPointerTo(anEntry) != nullptr);
 }  // end contains
@@ -282,7 +337,7 @@ bool LinkedBag<ItemType>::contains(const ItemType& anEntry) const
 // Returns either a pointer to the node containing a given entry 
 // or the null pointer if the entry is not in the bag.
 template<class ItemType>
-Node<ItemType>* LinkedBag<ItemType>::getPointerTo(const ItemType& anEntry) const
+Node<ItemType>* DoublyLinkedBag<ItemType>::getPointerTo(const ItemType& anEntry) const
 {
    bool found = false;
    Node<ItemType>* curPtr = headPtr;
@@ -296,8 +351,5 @@ Node<ItemType>* LinkedBag<ItemType>::getPointerTo(const ItemType& anEntry) const
    } // end while
    
    return curPtr;
-} // end getPointerTo
-
-
-
+} // end getPointerT
 #endif
