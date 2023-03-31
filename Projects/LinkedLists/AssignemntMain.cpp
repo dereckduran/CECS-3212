@@ -71,52 +71,6 @@ void run(){
 
 /*
 
-MENU
------------------------------------------
-A) Display the assignment list in order added to list
-B) Add an assignment
-C) Remove an assignment 
-D) Get assignment(s) with earliest due date 
-E) Exit the program 
-Enter your choice: a
-Current assignments: 
-Description ------------------------------- Due Date
-
- MENU
------------------------------------------
-A) Display the assignment list in order added to list
-B) Add an assignment
-C) Remove an assignment 
-D) Get assignment(s) with earliest due date 
-E) Exit the program 
-Enter your choice: c
-There are no assignments in the list currently...
-
- MENU
------------------------------------------
-A) Display the assignment list in order added to list
-B) Add an assignment
-C) Remove an assignment 
-D) Get assignment(s) with earliest due date 
-E) Exit the program 
-Enter your choice: d
-There are no assignments in the list currently...
-
- MENU
------------------------------------------
-A) Display the assignment list in order added to list
-B) Add an assignment
-C) Remove an assignment 
-D) Get assignment(s) with earliest due date 
-E) Exit the program 
-Enter your choice: b
-Please enter the details for the new assignemnt: 
-Enter the description for the assignment: linked lists
-Enter the due date for this assignment: 
-Month: 4
-Day: 1
-Year:2023
-Assignment added to list succesfully...
 
  MENU
 -----------------------------------------
@@ -129,8 +83,8 @@ Enter your choice: b
 Please enter the details for the new assignemnt: 
 Enter the description for the assignment: lab
 Enter the due date for this assignment: 
-Month: 3
-Day: 27
+Month: 4
+Day: 1
 Year:2023
 Assignment added to list succesfully...
 
@@ -146,7 +100,7 @@ Please enter the details for the new assignemnt:
 Enter the description for the assignment: examen de fisica
 Enter the due date for this assignment: 
 Month: 4
-Day: 10
+Day: 1
 Year:2023
 Assignment added to list succesfully...
 
@@ -160,9 +114,50 @@ E) Exit the program
 Enter your choice: a
 Current assignments: 
 Description ------------------------------- Due Date
-linked lists---------------------------------------4 / 1 / 2023
-lab---------------------------------------3 / 27 / 2023
-examen de fisica---------------------------------------4 / 10 / 2023
+lab---------------------------------------4 / 1 / 2023
+examen de fisica---------------------------------------4 / 1 / 2023
+
+ MENU
+-----------------------------------------
+A) Display the assignment list in order added to list
+B) Add an assignment
+C) Remove an assignment 
+D) Get assignment(s) with earliest due date 
+E) Exit the program 
+Enter your choice: b
+Please enter the details for the new assignemnt: 
+Enter the description for the assignment: hacer apunter 
+Enter the due date for this assignment: 
+Month: 5
+Day: 1
+Year:2023
+Assignment added to list succesfully...
+
+ MENU
+-----------------------------------------
+A) Display the assignment list in order added to list
+B) Add an assignment
+C) Remove an assignment 
+D) Get assignment(s) with earliest due date 
+E) Exit the program 
+Enter your choice: a
+Current assignments: 
+Description ------------------------------- Due Date
+lab---------------------------------------4 / 1 / 2023
+examen de fisica---------------------------------------4 / 1 / 2023
+hacer apunter ---------------------------------------5 / 1 / 2023
+
+ MENU
+-----------------------------------------
+A) Display the assignment list in order added to list
+B) Add an assignment
+C) Remove an assignment 
+D) Get assignment(s) with earliest due date 
+E) Exit the program 
+Enter your choice: d
+The earliest assignment(s) found: 
+lab---------------------------------------4 / 1 / 2023
+examen de fisica---------------------------------------4 / 1 / 2023
 
  MENU
 -----------------------------------------
@@ -174,85 +169,6 @@ E) Exit the program
 Enter your choice: c
 Please enter the details for the assignemnt you would like to remove: 
 Enter the description for the assignment: lab
-Enter the due date for this assignment: 
-Month: 3
-Day: 27
-Year:2023
-The assignment was succesfully removed from the list. 
-
- MENU
------------------------------------------
-A) Display the assignment list in order added to list
-B) Add an assignment
-C) Remove an assignment 
-D) Get assignment(s) with earliest due date 
-E) Exit the program 
-Enter your choice: d
-The earliest assignment found: 
-linked lists---------------------------------------4 / 1 / 2023
- MENU
------------------------------------------
-A) Display the assignment list in order added to list
-B) Add an assignment
-C) Remove an assignment 
-D) Get assignment(s) with earliest due date 
-E) Exit the program 
-Enter your choice: a
-Current assignments: 
-Description ------------------------------- Due Date
-linked lists---------------------------------------4 / 1 / 2023
-examen de fisica---------------------------------------4 / 10 / 2023
-
- MENU
------------------------------------------
-A) Display the assignment list in order added to list
-B) Add an assignment
-C) Remove an assignment 
-D) Get assignment(s) with earliest due date 
-E) Exit the program 
-Enter your choice: b
-Please enter the details for the new assignemnt: 
-Enter the description for the assignment: presentacion de asociacion
-Enter the due date for this assignment: 
-Month: 3
-Day: 30
-Year:2023
-Assignment added to list succesfully...
-
- MENU
------------------------------------------
-A) Display the assignment list in order added to list
-B) Add an assignment
-C) Remove an assignment 
-D) Get assignment(s) with earliest due date 
-E) Exit the program 
-Enter your choice: a
-Current assignments: 
-Description ------------------------------- Due Date
-linked lists---------------------------------------4 / 1 / 2023
-examen de fisica---------------------------------------4 / 10 / 2023
-presentacion de asociacion---------------------------------------3 / 30 / 2023
-
- MENU
------------------------------------------
-A) Display the assignment list in order added to list
-B) Add an assignment
-C) Remove an assignment 
-D) Get assignment(s) with earliest due date 
-E) Exit the program 
-Enter your choice: d
-The earliest assignment found: 
-presentacion de asociacion---------------------------------------3 / 30 / 2023
- MENU
------------------------------------------
-A) Display the assignment list in order added to list
-B) Add an assignment
-C) Remove an assignment 
-D) Get assignment(s) with earliest due date 
-E) Exit the program 
-Enter your choice: c
-Please enter the details for the assignemnt you would like to remove: 
-Enter the description for the assignment: linked lists
 Enter the due date for this assignment: 
 Month: 4
 Day: 1
@@ -269,8 +185,19 @@ E) Exit the program
 Enter your choice: a
 Current assignments: 
 Description ------------------------------- Due Date
-presentacion de asociacion---------------------------------------3 / 30 / 2023
-examen de fisica---------------------------------------4 / 10 / 2023
+hacer apunter ---------------------------------------5 / 1 / 2023
+examen de fisica---------------------------------------4 / 1 / 2023
+
+ MENU
+-----------------------------------------
+A) Display the assignment list in order added to list
+B) Add an assignment
+C) Remove an assignment 
+D) Get assignment(s) with earliest due date 
+E) Exit the program 
+Enter your choice: d
+The earliest assignment(s) found: 
+examen de fisica---------------------------------------4 / 1 / 2023
 
  MENU
 -----------------------------------------
@@ -280,5 +207,4 @@ C) Remove an assignment
 D) Get assignment(s) with earliest due date 
 E) Exit the program 
 Enter your choice: e
-
 */

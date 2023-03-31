@@ -12,15 +12,17 @@ class Node
 private:
    ItemType        item; // A data item
    Node<ItemType>* next; // Pointer to next node
-   
+   Node<ItemType>* prev; // Pointer to previous node
 public:
    Node();
    Node(const ItemType& anItem);
-   Node(const ItemType& anItem, Node<ItemType>* nextNodePtr);
+   Node(const ItemType& anItem, Node<ItemType>* nextNodePtr, Node<ItemType>* prevNodePtr);
    void setItem(const ItemType& anItem);
    void setNext(Node<ItemType>* nextNodePtr);
+   void setPrev(Node<ItemType>* prevNodePtr);
    ItemType getItem() const ;
    Node<ItemType>* getNext() const ;
+   Node<ItemType>* getPrev() const ;
 }; // end Node
 
 template<class ItemType>
@@ -29,13 +31,13 @@ Node<ItemType>::Node() : next(nullptr)
 } // end default constructor
 
 template<class ItemType>
-Node<ItemType>::Node(const ItemType& anItem) : item(anItem), next(nullptr)
+Node<ItemType>::Node(const ItemType& anItem) : item(anItem), next(nullptr), prev(nullptr)
 {
 } // end constructor
 
 template<class ItemType>
-Node<ItemType>::Node(const ItemType& anItem, Node<ItemType>* nextNodePtr) :
-                item(anItem), next(nextNodePtr)
+Node<ItemType>::Node(const ItemType& anItem, Node<ItemType>* nextNodePtr, Node<ItemType>* prevNodePtr) :
+                item(anItem), next(nextNodePtr), prev(prevNodePtr)
 {
 } // end constructor
 
@@ -52,6 +54,12 @@ void Node<ItemType>::setNext(Node<ItemType>* nextNodePtr)
 } // end setNext
 
 template<class ItemType>
+void Node<ItemType>::setPrev(Node<ItemType>* prevNodePtr)
+{
+   prev = prevNodePtr;
+}
+
+template<class ItemType>
 ItemType Node<ItemType>::getItem() const
 {
    return item;
@@ -62,5 +70,11 @@ Node<ItemType>* Node<ItemType>::getNext() const
 {
    return next;
 } // end getNext
+
+template<class ItemType> 
+Node<ItemType>* Node<ItemType>::getPrev() const
+{
+   return prev;
+}
 
 #endif

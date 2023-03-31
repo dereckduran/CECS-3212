@@ -96,11 +96,12 @@ Assignment AssignmentList::due()
             //si la fecha de la asignacion es menor entonces cambia la info del objeto
             if (curPtr->getItem().getDueDate() < _earlyassignment.getDueDate())
             {
-                _earlyassignment.setDescription(curPtr->getItem().getDescription());
-                _earlyassignment.setDueDate(curPtr->getItem().getDueDate());
-                _tempList.addToTail(_earlyassignment);
+                _earlyassignment = curPtr->getItem();
+                _tempList.clear();
+                _tempList.add(_earlyassignment);
             }
             // si hay otra asignacion con la misma fecha de entrega se debe añadir a una lista temporera
+            //need a conditional that evaluates after the fact
             else if (curPtr->getItem().getDueDate() == _earlyassignment.getDueDate()) 
             {
                 _tempList.addToTail(curPtr->getItem());
