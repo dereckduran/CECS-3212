@@ -124,6 +124,7 @@ bool LinkedBag<ItemType>::add(const ItemType& newEntry)
    
    return true;
 }  // end add
+
 template<class ItemType>
 bool LinkedBag<ItemType>::addToTail(const ItemType & newEntry){
    // Add to end of chain: new node references rest of chain;
