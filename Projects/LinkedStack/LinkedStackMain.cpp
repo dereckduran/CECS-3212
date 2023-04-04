@@ -10,6 +10,7 @@ int main(){
     int i = 0;
 
     string word;
+    bool balanced;
 
     cout <<"Enter your word to be evaluated: ";
     cin >> word;
@@ -29,8 +30,11 @@ int main(){
     }
     stack1.display();
     stack2.display();
-    palindrome(stack1, stack2);
-
+    balanced = palindrome(stack1, stack2);
+    if (!balanced) 
+        cout << "Not palindrome" << endl;
+    else
+        cout << "Is a palindrome" << endl;
     
     return 0;
 }

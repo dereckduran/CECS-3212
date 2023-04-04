@@ -4,21 +4,24 @@
 #include "Node.h"
 #include <iostream>
 #include <cassert>
+
 using namespace std;
+
 template<class ItemType>
 class LinkedStack : public StackInterface<ItemType> {
-private:
-Node<ItemType>* topPtr; // Pointer to first node in the chain; // this node contains the stack’s top
-public:
-// Constructors and destructor:
-LinkedStack(); // Default constructor
-LinkedStack(const LinkedStack<ItemType>& aStack); // Copy constructor virtual 
-virtual ~LinkedStack(); // Destructor
-// Stack operations:
-bool isEmpty() const;
-bool push(const ItemType& newItem); bool pop();
-ItemType peek() const;
-void display() ;
+    private:
+        Node<ItemType>* topPtr; // Pointer to first node in the chain; // this node contains the stack’s top
+    public:
+        // Constructors and destructor:
+        LinkedStack(); // Default constructor
+        LinkedStack(const LinkedStack<ItemType>& aStack); // Copy constructor virtual 
+        virtual ~LinkedStack(); // Destructor
+        // Stack operations:
+        bool isEmpty() const;
+        bool push(const ItemType& newItem); 
+        bool pop();
+        ItemType peek() const;
+        void display() ;
 };// end LinkedStack
 
 template <class ItemType> 
@@ -30,12 +33,11 @@ void LinkedStack<ItemType>:: display()
         cout << curPtr->getItem() << " ";
         curPtr = curPtr->getNext();
     }
-    cout <<endl;
+    cout << endl;
 
 }
 template<class ItemType> 
-LinkedStack<ItemType>::LinkedStack() : topPtr(nullptr) {
-} // end default constructor
+LinkedStack<ItemType>::LinkedStack() : topPtr(nullptr) {} // end default constructor
 
 template<class ItemType>
 LinkedStack<ItemType>::LinkedStack(const LinkedStack<ItemType>& aStack) 
@@ -67,36 +69,47 @@ LinkedStack<ItemType>::LinkedStack(const LinkedStack<ItemType>& aStack)
 } // end if
 template<class ItemType> LinkedStack<ItemType>::~LinkedStack() {
 // Pop until stack is empty
-while (!isEmpty()) 
-pop();
+    while (!isEmpty()) 
+    pop();
 } // end destructor
 
 template<class ItemType>
 bool LinkedStack<ItemType>::isEmpty() const {
-return topPtr == nullptr; } // end isEmp
+    return topPtr == nullptr;
+ } // end isEmp
 
 template<class ItemType>
-bool LinkedStack<ItemType>::push(const ItemType& newItem) {
-Node<ItemType>* newNodePtr = new Node<ItemType>(newItem, topPtr); topPtr = newNodePtr;
-newNodePtr = nullptr;
-return true; } // end push
+bool LinkedStack<ItemType>::push(const ItemType& newItem)
+{
+    Node<ItemType>* newNodePtr = new Node<ItemType>(newItem, topPtr); 
+    topPtr = newNodePtr;
+    newNodePtr = nullptr;
+    return true;
+} // end push
 
 template<class ItemType>
 bool LinkedStack<ItemType>::pop() {
-bool result = false; if (!isEmpty())
-{
-// Stack is not empty; delete top
-Node<ItemType>* nodeToDeletePtr = topPtr; topPtr = topPtr->getNext();
-// Return deleted node to system
-nodeToDeletePtr->setNext(nullptr); delete nodeToDeletePtr; nodeToDeletePtr = nullptr;
-result = true; } // end if
-return result; } // end pop
+    bool result = false; 
+    if (!isEmpty())
+    {
+        // Stack is not empty; delete top
+        Node<ItemType>* nodeToDeletePtr = topPtr; 
+        topPtr = topPtr->getNext();
+
+        // Return deleted node to system
+        nodeToDeletePtr->setNext(nullptr); 
+        delete nodeToDeletePtr; 
+        nodeToDeletePtr = nullptr;
+        result = true;
+    } // end if
+    return result; 
+} // end pop
 
 template<class ItemType>
 ItemType LinkedStack<ItemType>::peek() const {
-assert(!isEmpty()); // Enforce precondition
-// Stack is not empty; return top
-return topPtr->getItem(); 
+    assert(!isEmpty()); // Enforce precondition
+    // Stack is not empty; return top
+    return topPtr->getItem(); 
 } // end getTop
 
 #endif
