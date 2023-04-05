@@ -1,0 +1,47 @@
+<mxfile host="app.diagrams.net" modified="2023-04-04T04:08:12.442Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36" etag="PwXS05ntpzBm9GNcFzxh" version="21.1.4" type="github">
+  <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
+    <mxGraphModel dx="954" dy="648" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
+        <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
+        <mxCell id="SXqUAjejxaJ3Aqa2VeLt-20" value="LinkedStack" style="swimlane;fontStyle=2;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="220" y="20" width="290" height="240" as="geometry">
+            <mxRectangle x="230" y="140" width="160" height="26" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="SXqUAjejxaJ3Aqa2VeLt-21" value="-TopPtr" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="SXqUAjejxaJ3Aqa2VeLt-20">
+          <mxGeometry y="26" width="290" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="SXqUAjejxaJ3Aqa2VeLt-23" value="" style="line;html=1;strokeWidth=1;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="SXqUAjejxaJ3Aqa2VeLt-20">
+          <mxGeometry y="52" width="290" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="SXqUAjejxaJ3Aqa2VeLt-24" value="+LinkedStack()&#xa;+LinkedStack(const LinkedStack&lt;ItemType&gt; &amp;)&#xa;+~virtual LinkedStack()&#xa;+isEmpty()&#xa;+push()&#xa;+pop()&#xa;+peek()&#xa;+display()&#xa;&#xa;" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="SXqUAjejxaJ3Aqa2VeLt-20">
+          <mxGeometry y="60" width="290" height="154" as="geometry" />
+        </mxCell>
+        <mxCell id="SXqUAjejxaJ3Aqa2VeLt-25" value="Node " style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="232.5" y="300" width="245" height="220" as="geometry">
+            <mxRectangle x="130" y="380" width="160" height="26" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="SXqUAjejxaJ3Aqa2VeLt-26" value="-Next " style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="SXqUAjejxaJ3Aqa2VeLt-25">
+          <mxGeometry y="26" width="245" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="SXqUAjejxaJ3Aqa2VeLt-27" value="-Item " style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" vertex="1" parent="SXqUAjejxaJ3Aqa2VeLt-25">
+          <mxGeometry y="52" width="245" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="SXqUAjejxaJ3Aqa2VeLt-28" value="" style="line;html=1;strokeWidth=1;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="SXqUAjejxaJ3Aqa2VeLt-25">
+          <mxGeometry y="78" width="245" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="SXqUAjejxaJ3Aqa2VeLt-29" value="Node()&#xa;Node(const ItemType &amp;)&#xa;Node(const ItemType &amp;, Node&lt;ItemType&gt;*0&#xa;setItem(const ItemType&amp;) &#xa;setNext( Node&lt;ItemType&gt; *) &#xa;getItem() &#xa;getNext()" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=0" vertex="1" parent="SXqUAjejxaJ3Aqa2VeLt-25">
+          <mxGeometry y="86" width="245" height="134" as="geometry" />
+        </mxCell>
+        <mxCell id="SXqUAjejxaJ3Aqa2VeLt-30" value="" style="endArrow=block;endSize=10;endFill=0;shadow=0;strokeWidth=1;rounded=0;edgeStyle=elbowEdgeStyle;elbow=vertical;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="SXqUAjejxaJ3Aqa2VeLt-25" target="SXqUAjejxaJ3Aqa2VeLt-20">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="200" y="203" as="sourcePoint" />
+            <mxPoint x="200" y="203" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
