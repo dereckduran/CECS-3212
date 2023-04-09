@@ -25,7 +25,7 @@ class IntegerSet
 
         IntegerSet operator-(IntegerSet &);
         bool operator==(IntegerSet &) const;
-        IntegerSet &operator=(const IntegerSet&); 
+        //IntegerSet &operator=(const IntegerSet&); 
         friend istream &operator>>(istream& input, IntegerSet& );
         friend ostream &operator<<(ostream& output, const IntegerSet& );
 
@@ -57,10 +57,14 @@ ArrayList<bool> IntegerSet::getSet() const
 IntegerSet IntegerSet::setUnion(const IntegerSet & secondSet) const
 {
     IntegerSet resultSet;
-    for(int index = 0; index < secondSet.getSet().getLength(); index++)
+    for(int index = 1; index < secondSet.getSet().getLength(); index++)
     {
         if(set.getEntry(index) || secondSet.getSet().getEntry(index))
-            resultSet.set.setEntry(index, true);
+            if(set.getEntry(index))
+                resultSet.set.insert(index , true);
+
+            if (secondSet.getSet().getEntry(index))
+                resultSet.set.insert(index , true);
     }
     return resultSet;
 }
@@ -71,7 +75,7 @@ IntegerSet IntegerSet::intersection(IntegerSet & secondSet)
     for(int index = 0; index < secondSet.getSet().getLength(); index++)
     {
         if(set.getEntry(index) && secondSet.getSet().getEntry(index))
-            resultSet.getSet().setEntry(index, true); 
+            resultSet.getSet().insert(index, true); 
     }
     return resultSet;
 }
@@ -97,7 +101,7 @@ IntegerSet IntegerSet::symmetricDifference(IntegerSet & secondSet)
 
 bool IntegerSet::operator==(IntegerSet & secondSet) const
 {
-    for (int index = 0; index < secondSet.getSet().getLength(); index++)
+    for (int index = 1; index < secondSet.getSet().getLength(); index++)
     {
         if( set.getEntry(index) != secondSet.getSet().getEntry(index))
             return false;
@@ -105,15 +109,15 @@ bool IntegerSet::operator==(IntegerSet & secondSet) const
     return true;
 }
 
-IntegerSet& IntegerSet::operator=(const IntegerSet & copySet) 
+/*IntegerSet& IntegerSet::operator=(const IntegerSet & copySet) 
 {
-    for(int index = 0; index < copySet.getSet().getLength(); index++)
+    for(int index = 1; index < copySet.getSet().getLength(); index++)
     {
         this->getSet().setEntry(index, copySet.getSet().getEntry(index));
     }
     return *this;
 }
-
+*/
 IntegerSet IntegerSet::operator-(IntegerSet & subtractingSet)
 {
     IntegerSet resultSet;
