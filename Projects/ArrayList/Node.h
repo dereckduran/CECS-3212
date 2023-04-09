@@ -6,6 +6,8 @@
 #ifndef _NODE
 #define _NODE
 #include <cstddef>
+#include <iostream>
+using namespace std;
 template<class ItemType>
 class Node
 {

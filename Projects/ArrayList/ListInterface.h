@@ -1,5 +1,7 @@
 #ifndef _LIST_INTERFACE
 #define _LIST_INTERFACE
+#include <iostream>
+using namespace std;
 
 template<class ItemType>
 class ListInterface

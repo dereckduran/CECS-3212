@@ -18,8 +18,8 @@ void displayMenu()
     cout << "C) Add an element \n";
     cout << "D) Remove an element from the head \n";
     cout << "E) Remove an element from the tail \n";
-    cout << "F) Shift an element to the left \n";
-    cout << "G) Shift an element to the right \n";
+    cout << "F) Shift elements to the left \n";
+    cout << "G) Shift elements to the right \n";
     cout << "H) Exit the program\n";
 }
 void run(){
@@ -66,16 +66,14 @@ void run(){
             
             case 'f':
             case 'F': 
-            cout << "Enter the element you would like to shift to the left: ";
-            cin >> element;
-            mybag.shiftLeft(element);
+            
+            mybag.shiftLeft();
             break;
 
             case 'g':
             case 'G':
-            cout << "Enter the element you would like to shift to the right: ";
-            cin >> element;
-            mybag.shiftRight(element);
+            
+            mybag.shiftRight();
             break;
         }
     } while (toupper(choice) != 'H');

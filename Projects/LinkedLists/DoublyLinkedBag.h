@@ -37,8 +37,8 @@ public:
    void removeHead();
    void removeTail();
    bool removeFromTail(const ItemType& anEntry);
-   void shiftRight(ItemType pivot); 
-   void shiftLeft(ItemType pivot);
+   void shiftRight(); 
+   void shiftLeft();
    void clear();
    void display() const;
    void displayFromTail() const;
@@ -116,25 +116,27 @@ template<class ItemType>
 DoublyLinkedBag<ItemType>::DoublyLinkedBag(const DoublyLinkedBag<ItemType>& aBag)
 {
 	itemCount = aBag.itemCount;
-    Node<ItemType>* origChainPtr = aBag.headPtr;  // Points to nodes in original chain
+    Node<ItemType>* origChainHeadPtr = aBag.headPtr;  // Points to nodes in original chain
     Node<ItemType>* origChainTailPtr = aBag.tailPtr;
    
-   if (origChainPtr == nullptr)
+   if (origChainHeadPtr == nullptr)
       headPtr = nullptr;  // Original bag is empty
+      tailPtr = nullptr;
    else
    {
       // Copy first node
       headPtr = new Node<ItemType>();
+      tailPtr = new Node<ItemType>();
       headPtr->setItem(origChainPtr->getItem());
       
       // Copy remaining nodes
       Node<ItemType>* newChainPtr = headPtr;      // Points to last node in new chain
-      origChainPtr = origChainPtr->getNext();     // Advance original-chain pointer
+      origChainPtr = origChainHeadPtr->getNext();     // Advance original-chain pointer
       
-      while (origChainPtr != nullptr)
+      while (origChainHeadPtr != origChainTailPtr)
       {
          // Get next item from original chain
-         ItemType nextItem = origChainPtr->getItem();
+         ItemType nextItem = origChainHeadPtr->getItem();
          
          // Create a new node containing the next item
          Node<ItemType>* newNodePtr = new Node<ItemType>(nextItem);
@@ -149,7 +151,7 @@ DoublyLinkedBag<ItemType>::DoublyLinkedBag(const DoublyLinkedBag<ItemType>& aBag
          newChainPtr = newChainPtr->getNext();
          
          // Advance original-chain pointer
-         origChainPtr = origChainPtr->getNext();
+         origChainHeadPtr = origChainPtr->getNext();
       }  // end while
       
       newChainPtr->setNext(nullptr);              // Flag end of chain
@@ -157,42 +159,45 @@ DoublyLinkedBag<ItemType>::DoublyLinkedBag(const DoublyLinkedBag<ItemType>& aBag
 }  // end copy constructor
 
 template<class ItemType>
-void DoublyLinkedBag<ItemType>::shiftRight(ItemType pivot)
+void DoublyLinkedBag<ItemType>::shiftRight()
 {
-   Node<ItemType>* shift = getPointerTo(pivot);
-   Node<ItemType>* _temp = headPtr;
+   Node<ItemType>* shift = tailPtr;
+   Node<ItemType>* _temp = tailPtr;
    ItemType itemCont = shift->getItem();
 
-   if (shift == tailPtr)
-      cout << "Cannot shift the tail to nothing...";
-   else {
-      headPtr = shift;
-      shift = shift->getNext();
-      headPtr->setItem(shift->getItem());
-      headPtr = shift;
-      headPtr->setItem(itemCont);
-      headPtr = _temp;
+   if (isEmpty())
+      cout << "Cannot shift nothing...";
+   else 
+   {
+      while(shift->getPrev() != nullptr)
+      {
+         shift = shift->getPrev(); 
+         _temp->setItem(shift->getItem());
+         _temp = shift; 
+         _temp->setItem(itemCont);
+      }
    }
    display();
 }
 
 template<class ItemType>
-void DoublyLinkedBag<ItemType>::shiftLeft(ItemType pivot)
+void DoublyLinkedBag<ItemType>::shiftLeft()
 {
-   Node<ItemType>* shift = getPointerTo(pivot);
-   Node<ItemType>* _temp = tailPtr;
+   Node<ItemType>* shift = headPtr;
+   Node<ItemType>* _temp = headPtr;
    ItemType itemCont = shift->getItem();
-   if (shift == headPtr){
-      cout << "Cannot shift the head with nothing...";
+   if (isEmpty()){
+      cout << "Cannot shift nothing...";
    }
    else 
    {
-      tailPtr = shift;
-      shift = shift->getPrev();
-      tailPtr->setItem(shift->getItem());
-      tailPtr = shift;
-      tailPtr->setItem(itemCont);
-      tailPtr = _temp;
+      while(shift->getNext() != nullptr)
+      {
+         shift = shift->getNext();
+         _temp->setItem(shift->getItem());
+         _temp = shift;
+         _temp->setItem(itemCont);
+      }
    }
    display();
 }
@@ -342,7 +347,7 @@ template<class ItemType>
 void DoublyLinkedBag<ItemType>::clear()
 {
    Node<ItemType>* nodeToDeletePtr = headPtr;
-   while (headPtr != nullptr)
+   while (headPtr->getNext() != tailPtr)
    {
       headPtr = headPtr->getNext();
       
@@ -354,6 +359,7 @@ void DoublyLinkedBag<ItemType>::clear()
       nodeToDeletePtr = headPtr;
    }  // end while
    // headPtr is nullptr; nodeToDeletePtr is nullptr 
+   delete tailPtr;
 	itemCount = 0;
 }  // end clear
 
