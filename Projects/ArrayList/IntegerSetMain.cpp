@@ -15,8 +15,12 @@ int main()
     cout << "Set B: \n";
     cout << setB;
 
-    cout << "The union of sets: \n"; 
+    cout << "The intersection of sets: \n"; 
     resultSet = setA.setUnion(setB);
     cout << resultSet;
+    
+    cout << "Getting the difference between sets (elements in A but not B): \n";
+    setA = setA.difference(setB);
+    cout << setA;
     return 0;
 }

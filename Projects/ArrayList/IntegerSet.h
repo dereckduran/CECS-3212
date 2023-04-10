@@ -6,6 +6,7 @@ using namespace std;
 class IntegerSet
 {   
     private:
+        static const int MAX_LENGTH = 99;
         ArrayList<bool> set;
 
     public:
@@ -22,6 +23,7 @@ class IntegerSet
         IntegerSet intersection(IntegerSet &);
         IntegerSet difference(IntegerSet &);
         IntegerSet symmetricDifference(IntegerSet &);
+        int getSetLength() const ;
 
         IntegerSet operator-(IntegerSet &);
         bool operator==(IntegerSet &) const;
@@ -34,7 +36,7 @@ class IntegerSet
 IntegerSet::IntegerSet(){}
 IntegerSet::IntegerSet(int boolArray[])
 {
-    for (int index = 0; index < set.getLength(); index++)
+    for (int index = 0; index < MAX_LENGTH; index++)
     {
         if (boolArray[index])
             set.setEntry(index, true);
@@ -52,19 +54,22 @@ ArrayList<bool> IntegerSet::getSet() const
 {
     return set;
 }
-
+int IntegerSet::getSetLength() const
+{
+    return set.getLength();
+}
 
 IntegerSet IntegerSet::setUnion(const IntegerSet & secondSet) const
 {
     IntegerSet resultSet;
-    for(int index = 1; index < secondSet.getSet().getLength(); index++)
+    for(int index = 1; index < MAX_LENGTH; index++)
     {
-        if(set.getEntry(index) || secondSet.getSet().getEntry(index))
+        if(set.getEntry(index) || secondSet.set.getEntry(index))
             if(set.getEntry(index))
-                resultSet.set.insert(index , true);
+                resultSet.set.insert(index, true);
 
             if (secondSet.getSet().getEntry(index))
-                resultSet.set.insert(index , true);
+                resultSet.set.insert(index, true);
     }
     return resultSet;
 }
@@ -72,10 +77,10 @@ IntegerSet IntegerSet::setUnion(const IntegerSet & secondSet) const
 IntegerSet IntegerSet::intersection(IntegerSet & secondSet)
 {
     IntegerSet resultSet;
-    for(int index = 0; index < secondSet.getSet().getLength(); index++)
+    for(int index = 1; index < MAX_LENGTH; index++)
     {
         if(set.getEntry(index) && secondSet.getSet().getEntry(index))
-            resultSet.getSet().insert(index, true); 
+            resultSet.set.setEntry(index, true); 
     }
     return resultSet;
 }
@@ -113,7 +118,7 @@ bool IntegerSet::operator==(IntegerSet & secondSet) const
 {
     for(int index = 1; index < copySet.getSet().getLength(); index++)
     {
-        this->getSet().setEntry(index, copySet.getSet().getEntry(index));
+        set.setEntry(index, copySet.set.getEntry(index));
     }
     return *this;
 }
@@ -121,9 +126,10 @@ bool IntegerSet::operator==(IntegerSet & secondSet) const
 IntegerSet IntegerSet::operator-(IntegerSet & subtractingSet)
 {
     IntegerSet resultSet;
-    for (int index = 0; index < subtractingSet.getSet().getLength(); index++)
+    for (int index = 1; index < MAX_LENGTH; index++)
         if (set.getEntry(index) && subtractingSet.set.getEntry(index))
-            resultSet.getSet().setEntry(index, false);
+            set.setEntry(index, false);
+    resultSet = *this;
 
     return resultSet;
 }
@@ -159,12 +165,12 @@ istream &operator>>(istream &input, IntegerSet & _mySet)
 
 ostream &operator<<(ostream & output, IntegerSet & _mySet)
 {
-    
+    const int MAX_LENGTH = 100;
     output << "The set contents.." << endl;
-    for(int index = 0; index < _mySet.getSet().getLength(); index++)
+    for(int index = 1; index < MAX_LENGTH; index++)
     {
-        if(_mySet.getSet().getEntry(index + 1))
-            output << index + 1 << " ";
+        if(_mySet.getSet().getEntry(index))
+            output << index << " ";
     }
     cout <<'\n';
     return output;

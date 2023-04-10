@@ -49,7 +49,7 @@ public:
  @file ArrayList.cpp */
 
 template<class ItemType>
-ArrayList<ItemType>::ArrayList() : itemCount(99), maxItems(DEFAULT_CAPACITY)
+ArrayList<ItemType>::ArrayList() : itemCount(0), maxItems(DEFAULT_CAPACITY)
 {
 }  // end default constructor
 
@@ -79,8 +79,7 @@ int ArrayList<ItemType>::getLength() const
 template<class ItemType>
 bool ArrayList<ItemType>::insert(int newPosition, const ItemType& newEntry)
 {
-   bool ableToInsert = (newPosition >= 1) && (newPosition <= itemCount + 1) &&             
-                       (itemCount < maxItems);
+   bool ableToInsert = (newPosition >= 1) && (itemCount < maxItems); //&& (newPosition <= itemCount + 1)
    if (ableToInsert)
    {
       // Make room for new entry by shifting all entries at
@@ -88,7 +87,7 @@ bool ArrayList<ItemType>::insert(int newPosition, const ItemType& newEntry)
       // (no shift if newPosition == itemCount + 1)
       // Insert new entry
       items[newPosition - 1] = newEntry;
-      //itemCount++;  // Increase count of entries
+      itemCount++;  // Increase count of entries
    }  // end if
    
    return ableToInsert;
@@ -107,7 +106,7 @@ bool ArrayList<ItemType>::remove(int position)
 	        fromIndex++, toIndex++)
          items[toIndex] = items[fromIndex];
          
-      //itemCount--;  //Decrease count of entries
+      itemCount--;  //Decrease count of entries
    }  // end if
    
    return ableToRemove;
@@ -117,14 +116,14 @@ template<class ItemType>
 void ArrayList<ItemType>::clear()
 {
    //items = {false};
-   //itemCount = 0;
+   itemCount = 0;
 }  // end clear
 
 template<class ItemType>
 ItemType ArrayList<ItemType>::getEntry(int position) const 
 {
    // Enforce precondition
-   bool ableToGet = (position >= 1) && (position <= itemCount);
+   bool ableToGet = (position >= 1); //&& (position <= itemCount)
    if (ableToGet)
       return items[position - 1];
    else
@@ -139,7 +138,7 @@ template<class ItemType>
 void ArrayList<ItemType>::setEntry(int position, const ItemType& newEntry) 
 {
    // Enforce precondition
-   bool ableToSet = (position >= 1) && (position <= itemCount);
+   bool ableToSet = (position >= 1) && (position <= maxItems);
    if (ableToSet)
       items[position - 1] = newEntry;
    else
