@@ -106,9 +106,9 @@ IntegerSet IntegerSet::symmetricDifference(IntegerSet & secondSet)
 
 bool IntegerSet::operator==(IntegerSet & secondSet) const
 {
-    for (int index = 1; index < secondSet.getSet().getLength(); index++)
+    for (int index = 1; index < MAX_LENGTH; index++)
     {
-        if( set.getEntry(index) != secondSet.getSet().getEntry(index))
+        if(set.getEntry(index) != secondSet.getSet().getEntry(index))
             return false;
     }
     return true;
@@ -125,11 +125,10 @@ bool IntegerSet::operator==(IntegerSet & secondSet) const
 */
 IntegerSet IntegerSet::operator-(IntegerSet & subtractingSet)
 {
-    IntegerSet resultSet;
+    IntegerSet resultSet = *this;
     for (int index = 1; index < MAX_LENGTH; index++)
         if (set.getEntry(index) && subtractingSet.set.getEntry(index))
-            set.setEntry(index, false);
-    resultSet = *this;
+            resultSet.set.setEntry(index, false);
 
     return resultSet;
 }
