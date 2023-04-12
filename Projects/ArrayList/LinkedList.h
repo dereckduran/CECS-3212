@@ -44,7 +44,7 @@ public:
 }; // end LinkedList
   
 template<class ItemType>
-LinkedList<ItemType>::LinkedList() : headPtr(nullptr), itemCount(0)
+LinkedList<ItemType>::LinkedList() : headPtr(nullptr), itemCount(0), dummyNode(nullptr, headPtr)
 {
 }  // end default constructor
 

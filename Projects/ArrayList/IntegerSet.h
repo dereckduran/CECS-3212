@@ -12,11 +12,13 @@ class IntegerSet
     public:
         IntegerSet();
         IntegerSet(int []);
-        IntegerSet copyconstructor(const IntegerSet &);
+        IntegerSet(const IntegerSet &);
 
         virtual ~IntegerSet();
 
-        void setSet(int []);
+        void addElement(int position);
+        void deleteElement(int position);
+        void clear();
         ArrayList<bool> getSet() const;
 
         IntegerSet setUnion(const IntegerSet &) const;
@@ -33,23 +35,42 @@ class IntegerSet
 
 };
 
-IntegerSet::IntegerSet(){}
+IntegerSet::IntegerSet(){
+
+}
 IntegerSet::IntegerSet(int boolArray[])
 {
-    for (int index = 0; index < MAX_LENGTH; index++)
+    int index;
+    while(boolArray[index])
     {
-        if (boolArray[index])
-            set.setEntry(index, true);
+        set.setEntry(boolArray[index], true);
+        index++;
     }
 }
-
+IntegerSet::IntegerSet(const IntegerSet& _copy)
+{
+    for(int index = 1; index < MAX_LENGTH; index ++)
+    {
+        if(_copy.set.getEntry(index))
+            set.insert(index, _copy.set.getEntry(index));
+    }
+}
 IntegerSet::~IntegerSet(){}
 
-void IntegerSet::setSet(int boolSet[])
+void IntegerSet::addElement(int position)
 {
-    
+    set.insert(position, true);
 }
 
+void IntegerSet::deleteElement(int position)
+{
+    set.setEntry(position, false);
+}
+void IntegerSet::clear()
+{
+    for(int index = 1; index < MAX_LENGTH; index++)
+        deleteElement(index);
+}
 ArrayList<bool> IntegerSet::getSet() const
 {
     return set;
@@ -108,7 +129,7 @@ bool IntegerSet::operator==(IntegerSet & secondSet) const
 {
     for (int index = 1; index < MAX_LENGTH; index++)
     {
-        if(set.getEntry(index) != secondSet.getSet().getEntry(index))
+        if(set.getEntry(index) != secondSet.set.getEntry(index))
             return false;
     }
     return true;
@@ -166,6 +187,7 @@ ostream &operator<<(ostream & output, IntegerSet & _mySet)
 {
     const int MAX_LENGTH = 100;
     output << "The set contents.." << endl;
+
     for(int index = 1; index < MAX_LENGTH; index++)
     {
         if(_mySet.getSet().getEntry(index))
