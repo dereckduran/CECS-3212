@@ -1,0 +1,39 @@
+<mxfile host="app.diagrams.net" modified="2023-04-11T21:37:30.460Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36" etag="RI9cvnWIk9zUkMydRYhL" version="21.1.4" type="github">
+  <diagram name="Page-1" id="PC9YifsDm812Xhjxy8lz">
+    <mxGraphModel dx="349" dy="648" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="l6UKOy1imxGL3sqhDMHL-1" value="IntegerSet" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=20;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="250" width="370" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="l6UKOy1imxGL3sqhDMHL-2" value="+ MAX_LENGTH: const int&lt;br&gt;+ set: ArrayList&amp;lt;bool&amp;gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="l6UKOy1imxGL3sqhDMHL-1">
+          <mxGeometry y="20" width="370" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="l6UKOy1imxGL3sqhDMHL-3" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="l6UKOy1imxGL3sqhDMHL-1">
+          <mxGeometry y="60" width="370" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="l6UKOy1imxGL3sqhDMHL-4" value="+ IntegerSet()&lt;br&gt;+ ~IntegerSet()&lt;br&gt;+ setSet(int [])&lt;br&gt;+ getSet()&lt;br&gt;+ setUnion(const IntegerSet &amp;amp;)&lt;br&gt;+ intersection(IntegerSet &amp;amp;)&lt;br&gt;+ difference(IntegerSet &amp;amp;)&lt;br&gt;+ symmetricDifference(IntegerSet &amp;amp;)&lt;br&gt;+getSetLength()&lt;br&gt;+operator-&lt;br&gt;+operator==&lt;br&gt;+friend istream &amp;amp;operator&amp;gt;&amp;gt;(istream &amp;amp; input, IntegerSet&amp;amp;)&lt;br&gt;+friend ostream &amp;amp;operator&amp;lt;&amp;lt;(ostream&amp;amp; output, const IntegerSet &amp;amp;)&amp;nbsp;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="l6UKOy1imxGL3sqhDMHL-1">
+          <mxGeometry y="68" width="370" height="212" as="geometry" />
+        </mxCell>
+        <mxCell id="l6UKOy1imxGL3sqhDMHL-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="l6UKOy1imxGL3sqhDMHL-5">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="425" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="l6UKOy1imxGL3sqhDMHL-5" value="ArrayList" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="260" y="390" width="330" height="350" as="geometry" />
+        </mxCell>
+        <mxCell id="l6UKOy1imxGL3sqhDMHL-6" value="+ Default_Capacity: int&amp;nbsp;&lt;br&gt;+ items: ItemType&lt;br&gt;+itemcount: int&amp;nbsp;&lt;br&gt;+maxitems: int&amp;nbsp;&amp;nbsp;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="l6UKOy1imxGL3sqhDMHL-5">
+          <mxGeometry y="26" width="330" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="l6UKOy1imxGL3sqhDMHL-7" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="l6UKOy1imxGL3sqhDMHL-5">
+          <mxGeometry y="100" width="330" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="l6UKOy1imxGL3sqhDMHL-8" value="+ ArrayList()&lt;br&gt;+ isEmpty()&lt;br&gt;+getLength()&lt;br&gt;+insert(int newPosition, const ItemType&amp;amp; newEntry)&lt;br&gt;+remove(int position)&lt;br&gt;+clear()&amp;nbsp;&lt;br&gt;+display()&amp;nbsp;&lt;br&gt;+getEntry(int position)&lt;br&gt;+setEntry(int position, const ItemType&amp;amp; newEntry)&amp;nbsp;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="l6UKOy1imxGL3sqhDMHL-5">
+          <mxGeometry y="108" width="330" height="242" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
