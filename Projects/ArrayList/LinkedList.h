@@ -12,7 +12,7 @@ private:
    Node<ItemType>* headPtr; // Pointer to first node in the chain;
                             // (contains the first entry in the list)
    int itemCount;           // Current count of list items 
-   
+   Node<ItemType>* dummy;
    // Locates a specified node in this linked list.
    // @pre  position is the number of the desired node;
    //       position >= 1 and position <= itemCount.
@@ -31,21 +31,24 @@ public:
    bool insert(int newPosition, const ItemType& newEntry);
    bool remove(int position);
    void clear();
+   void addElement(ItemType element);
    void display() const;
    
    /** @throw PrecondViolatedExcep if position < 1 or 
                                       position > getLength(). */
-   ItemType getEntry(int position) const noexcept(false);
+   ItemType getEntry(int position) const ;
 
    /** @throw PrecondViolatedExcep if position < 1 or 
                                       position > getLength(). */
-   void setEntry(int position, const ItemType& newEntry)
-                               noexcept(false);
+   void setEntry(int position, const ItemType& newEntry);
 }; // end LinkedList
   
 template<class ItemType>
-LinkedList<ItemType>::LinkedList() : headPtr(nullptr), itemCount(0), dummyNode(nullptr, headPtr)
+LinkedList<ItemType>::LinkedList() : headPtr(nullptr), itemCount(0)
 {
+   dummy = new Node<ItemType>();
+   dummy->setItem(-1);
+   dummy->setNext(dummy);
 }  // end default constructor
 
 template<class ItemType>
@@ -76,11 +79,11 @@ bool LinkedList<ItemType>::insert(int newPosition, const ItemType& newEntry)
       Node<ItemType>* newNodePtr = new Node<ItemType>(newEntry);  
       
       // Attach new node to chain
-      if (newPosition == 1)
+      if (newPosition == 1) // add condition to 
       {
          // Insert new node at beginning of chain
-         newNodePtr->setNext(headPtr); 
          headPtr = newNodePtr;
+         dummy->setNext(headPtr); 
       }
       else
       {
@@ -143,7 +146,7 @@ void LinkedList<ItemType>::clear()
 }  // end clear
 
 template<class ItemType>
-ItemType LinkedList<ItemType>::getEntry(int position) const noexcept(false)
+ItemType LinkedList<ItemType>::getEntry(int position) const
 {
    // Enforce precondition
    bool ableToGet = (position >= 1) && (position <= itemCount);
@@ -181,103 +184,114 @@ LinkedList<ItemType>::LinkedList(const LinkedList<ItemType>& aList)
 {
 
 	itemCount = aList.itemCount;
+   dummy = aList.dummy;
 
-	Node<ItemType>* origChainPtr = aList.headPtr; // Points to nodes in original chain
+	Node<ItemType>* origChainPtr = aList.dummy;
 
-	if (origChainPtr == nullptr)
+	if (origChainPtr->getNext() == nullptr)
 
-		headPtr = nullptr; // Original bag is empty
+		headPtr = nullptr; 
 
 	else
 	{
-		// Copy first node
+      origChainPtr = origChainPtr->getNext();
 
+		
 		headPtr = new Node<ItemType>();
-
 		headPtr->setItem(origChainPtr->getItem());
-		// Copy remaining nodes
+      dummy->setNext(headPtr);
 
-		Node<ItemType>* newChainPtr = headPtr;   // Points to last node in new chain
+		Node<ItemType>* newChainPtr = headPtr;   
 
-		origChainPtr = origChainPtr->getNext();   // Advance original-chain pointer
+		origChainPtr = origChainPtr->getNext();   
 
-
-
-		while (origChainPtr != nullptr)
-
+		while (origChainPtr != aList.dummy)
 		{
-
-			// Get next item from original chain
+			
 
 			ItemType nextItem = origChainPtr->getItem();
 
-			// Create a new node containing the next item
+			
 
 			Node<ItemType>* newNodePtr = new Node<ItemType>(nextItem);
 
-			// Link new node to end of new chain
+			
 
 			newChainPtr->setNext(newNodePtr);
 
-			// Advance pointer to new last node
+			
 
 			newChainPtr = newChainPtr->getNext();
 
-			// Advance original-chain pointer
+			
 
 			origChainPtr = origChainPtr->getNext();
 
-		} // end while
+		} 
 
-		newChainPtr->setNext(nullptr);       // Flag end of chain
+		newChainPtr->setNext(dummy);       
+	}
 
-	} // end if
-
-} // end copy constructor
+} 
 
 template<class ItemType>
 
-void LinkedList<ItemType>::setEntry(int position, const ItemType& newEntry) noexcept(false)
-
+void LinkedList<ItemType>::setEntry(int position, const ItemType& newEntry)
 {
-
 	// Enforce precondition
 
 	bool ableToSet = (position >= 1) && (position <= itemCount);
-
 	if (ableToSet)
-
 	{
-
 		Node<ItemType>* nodePtr = getNodeAt(position);
-
 		nodePtr->setItem(newEntry);
-
 	}
-
 	else
-
 	{
-
 		string message = "setEntry() called with an invalid position.";
-
 		throw(PrecondViolatedExcep(message));
-
 	} // end if
 
 } // end setEntry
 
 template<class ItemType>
+void LinkedList<ItemType>::addElement(ItemType element)
+{
+   Node<ItemType>* newNode = new Node<ItemType>(element);
 
-void LinkedList<ItemType>::display() const{
+   if (isEmpty())
+   {
+      headPtr = newNode;
+      itemCount++;
+      dummy->setNext(headPtr);
+      headPtr->setNext(dummy);
+   }
+   else 
+   {
+      Node<ItemType>* curr = headPtr;
+      while(curr->getNext() != dummy)
+         curr = curr->getNext();
 
+      curr->setNext(newNode);
+      newNode->setNext(dummy);
+      itemCount++;
+   }
+}
 
-
-	for (int skip = 1; skip <= itemCount; skip++){
-
-		cout << getEntry(skip) << endl;
-
-	}//end for
-
+template<class ItemType>
+void LinkedList<ItemType>::display() const
+{
+   if(isEmpty())
+   {
+      cout << "The list is empty...\n";
+   }
+   else 
+   {
+      for (int skip = 1; skip <= itemCount; skip++)
+      {
+         cout << getEntry(skip) << " ";
+      }//end for
+      cout << endl;
+   }
 }
 #endif 
