@@ -4,6 +4,7 @@
         "iomanip": "cpp",
         "ios": "cpp",
         "iosfwd": "cpp",
-        "cassert": "cpp"
+        "cassert": "cpp",
+        "chrono": "cpp"
     }
 }
