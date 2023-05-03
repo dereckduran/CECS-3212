@@ -15,7 +15,6 @@ class RainFallYear
     public:
 
     RainFallYear();
-    RainFallYear(RainFallMonth []);
     RainFallYear(const RainFallYear &);
     virtual ~RainFallYear();
     float totalRainFall();
@@ -23,7 +22,6 @@ class RainFallYear
     void maxRainFallMonths();
     void minRainFallMonths();
 
-    RainFallMonth operator[](int position) const;
     friend ostream &operator<<(ostream &output, const RainFallYear &);
     friend istream &operator>>(istream &input, RainFallYear &);
 
@@ -56,6 +54,7 @@ inline float RainFallYear::avgRainFall()
         totalRain += yearlyRainFall.getEntry(index).getRainFall();
         index++;
     }
+    cout << totalRain / 12;
     return totalRain / 12;
 }
 void RainFallYear::maxRainFallMonths()
