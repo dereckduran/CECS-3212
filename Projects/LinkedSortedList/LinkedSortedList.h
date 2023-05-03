@@ -157,7 +157,7 @@ Node<ItemType>* LinkedSortedList<ItemType>::getNodeBefore(const ItemType& anEntr
    Node<ItemType>* curPtr = headPtr;
    Node<ItemType>* prevPtr = nullptr;
    
-   while ( (curPtr != nullptr) && (anEntry > curPtr->getItem()))
+   while ( (curPtr != nullptr) && (anEntry < curPtr->getItem()))
    {
       prevPtr = curPtr;
       curPtr = curPtr->getNext();

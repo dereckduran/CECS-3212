@@ -38,7 +38,7 @@ public:
  Listing 14-2.
  @file ListQueue.cpp */
 
-#include "ListQueue.h"  // header file
+
 
 template<class ItemType>
 ListQueue<ItemType>::ListQueue()

@@ -51,7 +51,7 @@ SL_PriorityQueue<ItemType>::~SL_PriorityQueue()
 template<class ItemType>
 bool SL_PriorityQueue<ItemType>::isEmpty() const 
 {
-   return slistPtr == 0;
+   return slistPtr->getLength() == 0;
 }
 
 template<class ItemType>
@@ -72,7 +72,7 @@ ItemType SL_PriorityQueue<ItemType>::peek() const
 {
    int position = slistPtr->getLength();
    if (isEmpty())
-      cout << "The list is empty...\n";
+      throw(PrecondViolatedExcep("The list is empty...\n"));
    else 
       return slistPtr->getEntry(position);
 }
