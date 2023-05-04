@@ -1,4 +1,5 @@
 #include <iostream>
+
 #include "Client.h"
 #include "PriorityQueue.h"
 #include "ListQueue.h"
@@ -13,6 +14,7 @@ int main() {
     ListQueue<Client> Bankline;//Create an empty queue bankQueue to represent the bank line
     SL_PriorityQueue<Client> Eventlist; //Create an empty priority queue eventListPQueue for the event list
     bool tellerAvailable = true;
+    
     Client next;
     int currentTime;
     int ActualTime = 0;
@@ -56,7 +58,7 @@ int main() {
 
 void Process_Arrival(ListQueue<Client>& waitingLine, SL_PriorityQueue<Client>& eventLine, bool& teller,Client& client )
 {
-    cout << client;
+    
     eventLine.remove();
     if (waitingLine.isEmpty() && teller)
     {
@@ -70,8 +72,7 @@ void Process_Arrival(ListQueue<Client>& waitingLine, SL_PriorityQueue<Client>& e
     {
         waitingLine.enqueue(client);
     }
-    waitingLine.display();
-    //eventLine.display();
+    cout << "Processed arrival at: " << client.getArrival() << endl;
 
 }
 
@@ -80,21 +81,22 @@ void Process_Departure(ListQueue<Client>& waitingLine, SL_PriorityQueue<Client>&
     eventLine.remove(); // Remove the departure event from the event list
 
 // Update the bank line
-    if (waitingLine.isEmpty()) { // bank line is not empty
+    if (!waitingLine.isEmpty()) { // bank line is not empty
         // Remove customer C from the front of the bank line
         Client Update = waitingLine.peekFront();
         waitingLine.dequeue();
 
         // Departure time of customer C is current time + transaction length
         int departureTime = timer + Update.getTransTime();
-
         // Add a departure event for customer C to the event list
         Client departureEvent('D', departureTime, 1);
         eventLine.add(departureEvent);
+
     }
     else { // bank line is empty
         // Mark the teller as available.
         teller = true;
     }
-   eventLine.display();
+
+    cout << "Processed departure at " << timer << endl;
 }

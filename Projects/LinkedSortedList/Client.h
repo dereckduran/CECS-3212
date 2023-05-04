@@ -91,7 +91,7 @@ inline bool Client::operator<(const Client &_aClient) const
 ostream &operator<<(ostream &output, const Client &aClient)
 {
     
-    output << "Client departed at: "<< aClient.getTransTime() << endl;
+    output <<  aClient.getTransTime() << endl;
 
     return output;
 }
