@@ -10,8 +10,7 @@ BinaryNode<ItemType>* rightChildPtr; // Pointer to right child
 public:
 BinaryNode();
 BinaryNode(const ItemType& anItem);
-BinaryNode(const ItemType& anItem,BinaryNode<ItemType>*
-leftPtr,BinaryNode<ItemType>* rightPtr);
+BinaryNode(const ItemType& anItem,BinaryNode<ItemType>*leftPtr,BinaryNode<ItemType>* rightPtr);
 void setItem(const ItemType& anItem);
 ItemType getItem() const;
 bool isLeaf() const;
@@ -26,14 +25,11 @@ BinaryNode<ItemType>::BinaryNode()
 {
 }// end default constructor
 template < class ItemType>
-BinaryNode<ItemType>::BinaryNode(const ItemType& anItem) :item(anItem),
-leftChildPtr(nullptr), rightChildPtr(nullptr)
+BinaryNode<ItemType>::BinaryNode(const ItemType& anItem) :item(anItem),leftChildPtr(nullptr), rightChildPtr(nullptr)
 {
 }//end copy cosntructor
 template < class ItemType>
-BinaryNode<ItemType>::BinaryNode(const ItemType& anItem, BinaryNode<ItemType>* leftPtr,
-BinaryNode<ItemType>* rightPtr) : item(anItem), leftChildPtr(leftPtr),
-rightChildPtr(rightPtr)
+BinaryNode<ItemType>::BinaryNode(const ItemType& anItem, BinaryNode<ItemType>* leftPtr,BinaryNode<ItemType>* rightPtr) : item(anItem), leftChildPtr(leftPtr),rightChildPtr(rightPtr)
 {
 }//end constructor
 template < class ItemType>

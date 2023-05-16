@@ -1,4 +1,4 @@
-#include<iostream>
+#include <iostream>
 using namespace::std;
 #include "BinaryNodeTree.h"
 template<class T>
@@ -7,23 +7,30 @@ cout << anItem << ",";
 }
 int main()
 {
-    BinaryNodeTree <int> balanceTree;
-    balanceTree.add(1);
-    balanceTree.add(2);
-    balanceTree.add(3);
-    balanceTree.add(4);
-    balanceTree.add(5);
-    balanceTree.add(6);
-    balanceTree.add(7);
-    balanceTree.add(8);
-    balanceTree.add(9);
-    balanceTree.add(10);
+    BinaryNodeTree <char*> balanceTree;
+    balanceTree.add("A");
+    balanceTree.add("B");
+    balanceTree.add("C");
+    balanceTree.add("D");
+    balanceTree.add("E");
+    balanceTree.add("F");
+    balanceTree.add("G");
+    
     cout << "\nRecorrido Preorder:";
     balanceTree.preorderTraverse(display);
     //Caso de eliminar la raiz del arbol
-    balanceTree.remove(1);
+    cout << "\nRecorrido InOrder:";
+    balanceTree.inorderTraverse(display);
     cout << "\nRecorrido Preorder:";
-    balanceTree.preorderTraverse(display);
+    balanceTree.postorderTraverse(display);
 
     return 0;
 }//end main
+/*
+Recorrido Preorder:A,B,D,G,F,C,E,
+Recorrido InOrder:G,D,B,F,A,E,C,
+Recorrido Preorder:G,D,F,B,E,C,A
+
+
+
+*/
